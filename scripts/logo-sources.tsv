@@ -31,7 +31,7 @@ princetonlibrary.org	https://princetonlibrary.libnet.info/images/editor/princeto
 # princetongardentheatre.org — manually provided logo; data/logos/princetongardentheatre.org.png is committed directly.
 www.labyrinthbooks.com	https://cdn11.bigcommerce.com/s-jo8zgdp0jo/images/stencil/250x100/download_1737493670__83675.original.png
 ai.princeton.edu	https://ai.princeton.edu/sites/g/files/toruqf6846/files/Prin%20AI%20-%20Linear%20-%20Reverse.svg
-fpul.princeton.edu	https://fpul.princeton.edu/sites/g/files/toruqf5441/files/friends-of-library%20%281%29.svg
+# fpul.princeton.edu — manually provided logo; data/logos/fpul.princeton.edu.png is committed directly.
 # gradschool.princeton.edu — manually provided logo; data/logos/gradschool.princeton.edu.png is committed directly.
 climatefutures.princeton.edu	https://climatefutures.princeton.edu/wp-content/themes/FoundationPress/src/assets/images/logo/CFI-logo.svg
 environment.princeton.edu	https://environment.princeton.edu/wp-content/themes/FoundationPress/src/assets/images/logo/hmei-logo.svg
@@ -46,3 +46,7 @@ tickets.princeton.edu	https://s3.eu-central-1.amazonaws.com/yt-s3/809e422f-2245-
 cdh.princeton.edu	https://cdh.princeton.edu/static/images/cdhlogo_square.jpg
 press.princeton.edu	https://press.princeton.edu/themes/custom/themekit/logo-social.png
 goprincetontigers.com	https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/princeton.sidearmsports.com/images/nextgen_2022/logo_main.svg
+# ccc.princeton.edu — manually provided logo; data/logos/ccc.princeton.edu.png is committed directly.
+# www.ias.edu — manually provided logo; data/logos/www.ias.edu.png is committed directly.
+# lisd.princeton.edu — manually provided logo; data/logos/lisd.princeton.edu.png is committed directly.
+# www.pppl.gov — manually provided logo; data/logos/www.pppl.gov.png is committed directly.
