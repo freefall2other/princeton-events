@@ -26,7 +26,8 @@ th[data-k]:hover{color:var(--ink)}
 td{padding:10px 8px;border-bottom:1px solid var(--rule);vertical-align:top}
 tr.top td:first-child{box-shadow:inset 4px 0 0 var(--orange)}
 tr.done{background:var(--row)}
-td.rank{width:34px;color:var(--orange);font-weight:600;text-align:center}
+td.rank{width:38px;color:var(--orange);font-weight:600;text-align:center}
+td.rank.plain{color:var(--muted);font-weight:400}
 td.link .linkhead{display:flex;gap:8px;align-items:flex-start}
 .logowrap{flex:0 0 auto;width:22px;height:22px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--rule);border-radius:4px;margin-top:1px;overflow:hidden}
 .logo{width:16px;height:16px;object-fit:contain}
@@ -82,7 +83,7 @@ footer{padding:18px 32px;color:var(--muted);font-size:13px}
   <span class="status" id="saveStatus"></span>
 </div>
 <table><thead><tr>
-  <th data-k="top" title="Rank in the proposed top 20">#</th>
+  <th data-k="top" title="Catalog order; 1-20 are the proposed priority sources">#</th>
   <th data-k="name">Source</th>
   <th data-k="subject">Subject</th>
   <th data-k="aud">Audience</th>
@@ -152,7 +153,8 @@ function logoHtml(r){const h=hostOf(r.url);if(!h)return iconSvg(r);
   +`<img class="logo" alt="${esc(r.name)} logo" loading="lazy" tabindex="0" role="button" title="Show larger logo" src="${first}" data-step="${slug?'-2':'0'}" data-slug="${slug||''}" data-host="${h}">`
   +`<span class="logofallback" hidden>${iconSvg(r)}</span></span>`;}
 
-const LOGOS={"www.princeton.edu": "www.princeton.edu", "community.princeton.edu": "community.princeton.edu", "lectures.princeton.edu": "lectures.princeton.edu", "humanities.princeton.edu": "humanities.princeton.edu", "uchv.princeton.edu": "uchv.princeton.edu", "spia.princeton.edu": "spia.princeton.edu", "icea.spia.princeton.edu": "icea.spia.princeton.edu", "jmp.princeton.edu": "jmp.princeton.edu", "history.princeton.edu": "history.princeton.edu", "piirs.princeton.edu": "piirs.princeton.edu", "citp.princeton.edu": "citp.princeton.edu", "innovation.princeton.edu": "innovation.princeton.edu", "arts.princeton.edu": "arts.princeton.edu", "music.princeton.edu": "music.princeton.edu", "artmuseum.princeton.edu": "artmuseum.princeton.edu", "effroncenter.princeton.edu": "effroncenter.princeton.edu", "cst.princeton.edu": "cst.princeton.edu", "phy.princeton.edu": "phy.princeton.edu", "pni.princeton.edu": "pni.princeton.edu", "classics.princeton.edu": "classics.princeton.edu", "anthropology.princeton.edu": "anthropology.princeton.edu", "orfe.princeton.edu": "orfe.princeton.edu", "judaic.princeton.edu": "judaic.princeton.edu", "spo.princeton.edu": "spo.princeton.edu", "italianstudies.princeton.edu": "italianstudies.princeton.edu", "artandarchaeology.princeton.edu": "artandarchaeology.princeton.edu", "fis.princeton.edu": "fis.princeton.edu", "princetonlibrary.libnet.info": "princetonlibrary.libnet.info", "princetonlibrary.org": "princetonlibrary.org", "princetongardentheatre.org": "princetongardentheatre.org", "www.labyrinthbooks.com": "www.labyrinthbooks.com"};
+const LOGOS={"www.princeton.edu": "www.princeton.edu", "community.princeton.edu": "community.princeton.edu", "lectures.princeton.edu": "lectures.princeton.edu", "humanities.princeton.edu": "humanities.princeton.edu", "uchv.princeton.edu": "uchv.princeton.edu", "spia.princeton.edu": "spia.princeton.edu", "icea.spia.princeton.edu": "icea.spia.princeton.edu", "jmp.princeton.edu": "jmp.princeton.edu", "history.princeton.edu": "history.princeton.edu", "piirs.princeton.edu": "piirs.princeton.edu", "citp.princeton.edu": "citp.princeton.edu", "innovation.princeton.edu": "innovation.princeton.edu", "arts.princeton.edu": "arts.princeton.edu", "music.princeton.edu": "music.princeton.edu", "artmuseum.princeton.edu": "artmuseum.princeton.edu", "effroncenter.princeton.edu": "effroncenter.princeton.edu", "cst.princeton.edu": "cst.princeton.edu", "phy.princeton.edu": "phy.princeton.edu", "pni.princeton.edu": "pni.princeton.edu", "classics.princeton.edu": "classics.princeton.edu", "anthropology.princeton.edu": "anthropology.princeton.edu", "orfe.princeton.edu": "orfe.princeton.edu", "judaic.princeton.edu": "judaic.princeton.edu", "spo.princeton.edu": "spo.princeton.edu", "italianstudies.princeton.edu": "italianstudies.princeton.edu", "artandarchaeology.princeton.edu": "artandarchaeology.princeton.edu", "fis.princeton.edu": "fis.princeton.edu", "princetonlibrary.libnet.info": "princetonlibrary.libnet.info", "princetonlibrary.org": "princetonlibrary.org", "princetongardentheatre.org": "princetongardentheatre.org", "www.labyrinthbooks.com": "www.labyrinthbooks.com", "ai.princeton.edu": "ai.princeton.edu", "fpul.princeton.edu": "fpul.princeton.edu", "gradschool.princeton.edu": "gradschool.princeton.edu"};
+const SEQ={"PU-001": 1, "PU-002": 14, "PU-003": 3, "PU-004": 2, "PU-006": 16, "TOWN-013": 4, "PU-014": 17, "PU-015": 5, "PU-016": 10, "PU-017": 9, "PU-018": 12, "PU-020": 6, "PU-032": 7, "TOWN-042": 18, "PU-043": 8, "PU-044": 11, "TOWN-048": 20, "PU-065": 13, "PU-070": 15, "PU-085": 19, "PU-005": 21, "PU-007": 22, "PU-008": 23, "PU-009": 24, "PU-010": 25, "PU-011": 26, "PU-012": 27, "PU-019": 28, "PU-021": 29, "PU-022": 30, "PU-023": 31, "PU-024": 32, "PU-025": 33, "PU-026": 34, "PU-027": 35, "PU-028": 36, "AFF-029": 37, "PU-030": 38, "PU-031": 39, "PU-033": 40, "PU-034": 41, "PU-035": 42, "PU-036": 43, "PU-037": 44, "TOWN-038": 45, "PU-039": 46, "PU-040": 47, "AFF-041": 48, "PU-045": 49, "TOWN-046": 50, "PU-047": 51, "TOWN-049": 52, "TOWN-050": 53, "TOWN-051": 54, "TOWN-052": 55, "PU-053": 56, "PU-054": 57, "TOWN-055": 58, "TOWN-056": 59, "PU-057": 60, "PU-058": 61, "PU-059": 62, "PU-060": 63, "PU-061": 64, "PU-062": 65, "PU-063": 66, "PU-064": 67, "PU-066": 68, "PU-067": 69, "PU-068": 70, "PU-069": 71, "PU-071": 72, "PU-072": 73, "PU-073": 74, "PU-074": 75, "PU-075": 76, "PU-076": 77, "TOWN-077": 78, "PU-078": 79, "PU-079": 80, "PU-080": 81, "PU-081": 82, "PU-082": 83, "PU-083": 84, "PU-084": 85, "PU-086": 86, "PU-087": 87, "PU-088": 88, "PU-089": 89, "PU-090": 90, "TOWN-091": 91, "PU-092": 92, "PU-093": 93, "PU-094": 94, "PU-095": 95, "PU-096": 96, "PU-097": 97, "PU-098": 98, "PU-099": 99, "PU-100": 100, "PU-101": 101, "PU-102": 102, "PU-103": 103, "PU-104": 104, "PU-105": 105, "PU-106": 106};
 const KEY='princeton-link-verdicts';
 let verdicts={};
 let sortK='top',sortDir=1;
@@ -167,10 +169,10 @@ function filtered(){const scope=$('#fScope').value,aff=$('#fAff').value,vf=$('#f
  return DATA.filter(r=>{if(scope==='top'&&!r.top)return false;if(scope==='crawl'&&r.dup)return false;if(aff&&r.aff!==aff)return false;
   const vv=v(r.id).verdict;if(vf==='none'&&vv)return false;if(vf&&vf!=='none'&&vv!==vf)return false;
   if(q&&!(r.name+' '+r.subject+' '+r.url+' '+r.abbr+' '+r.notes).toLowerCase().includes(q))return false;return true;})
- .sort((a,b)=>{let x=a[sortK],y=b[sortK];if(sortK==='top'){x=x||99;y=y||99;}if(sortK==='verified'){x=!x;y=!y;}return (x>y?1:x<y?-1:0)*sortDir;});}
+ .sort((a,b)=>{let x=a[sortK],y=b[sortK];if(sortK==='top'){x=SEQ[a.id];y=SEQ[b.id];}if(sortK==='verified'){x=!x;y=!y;}return (x>y?1:x<y?-1:0)*sortDir;});}
 function render(){const rows=filtered();const tb=$('#rows');tb.innerHTML='';$('#empty').hidden=rows.length>0;
  for(const r of rows){const vv=v(r.id);const tr=document.createElement('tr');tr.className=(r.top?'top ':'')+(vv.verdict?'done':'');
-  tr.innerHTML=`<td class="rank">${r.top||''}</td>
+  tr.innerHTML=`<td class="rank${r.top?'':' plain'}">${SEQ[r.id]}</td>
   <td class="link"><span class="linkhead">${logoHtml(r)}<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a></span><span class="url">${esc(r.url)}</span>
    <div class="meta" style="margin-top:4px"><span class="pill ${r.aff==='University'?'uni':''}">${esc(r.aff)}</span>${r.abbr?`<span class="pill">${esc(r.abbr)}</span>`:''}${r.dup?`<span class="pill">duplicate of ${esc(r.dup)}</span>`:r.parent?`<span class="pill">child of ${esc(r.parent)}</span>`:''}</div></td>
   <td class="meta">${esc(r.subject)}</td>
