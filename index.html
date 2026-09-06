@@ -65,7 +65,7 @@ footer{padding:18px 32px;color:var(--muted);font-size:13px}
   <div class="tally"><b id="nDone">0</b>of <span id="nTotal">106</span> checked<div class="bar"><i id="bar"></i></div></div>
 </header>
 <div class="tools">
-  <label>Show <select id="fScope"><option value="all">all 106</option><option value="top" selected>top 20 only</option><option value="crawl">crawl targets (no duplicates)</option></select></label>
+  <label>Show <select id="fScope"><option value="all" selected>all 106</option><option value="top">top 20 only</option><option value="crawl">crawl targets (no duplicates)</option></select></label>
   <label>Affiliation <select id="fAff"><option value="">any</option><option>University</option><option>Town</option><option>Affiliated</option></select></label>
   <label>Verdict <select id="fVerdict"><option value="">any</option><option value="none">not yet checked</option><option value="works">works</option><option value="broken">broken</option><option value="skip">skip</option></select></label>
   <input type="search" id="q" placeholder="Search name, subject, URL">
@@ -140,7 +140,7 @@ function logoHtml(r){const h=hostOf(r.url);if(!h)return iconSvg(r);
   +`<img class="logo" alt="" loading="lazy" src="${first}" data-step="${slug?'-2':'0'}" data-slug="${slug||''}" data-host="${h}">`
   +`<span class="logofallback" hidden>${iconSvg(r)}</span></span>`;}
 
-const LOGOS={"www.princeton.edu": "www.princeton.edu", "community.princeton.edu": "community.princeton.edu", "lectures.princeton.edu": "lectures.princeton.edu", "humanities.princeton.edu": "humanities.princeton.edu", "uchv.princeton.edu": "uchv.princeton.edu", "spia.princeton.edu": "spia.princeton.edu", "icea.spia.princeton.edu": "icea.spia.princeton.edu", "jmp.princeton.edu": "jmp.princeton.edu", "history.princeton.edu": "history.princeton.edu", "piirs.princeton.edu": "piirs.princeton.edu", "citp.princeton.edu": "citp.princeton.edu", "innovation.princeton.edu": "innovation.princeton.edu", "arts.princeton.edu": "arts.princeton.edu", "music.princeton.edu": "music.princeton.edu"};
+const LOGOS={"www.princeton.edu": "www.princeton.edu", "community.princeton.edu": "community.princeton.edu", "lectures.princeton.edu": "lectures.princeton.edu", "humanities.princeton.edu": "humanities.princeton.edu", "uchv.princeton.edu": "uchv.princeton.edu", "spia.princeton.edu": "spia.princeton.edu", "icea.spia.princeton.edu": "icea.spia.princeton.edu", "jmp.princeton.edu": "jmp.princeton.edu", "history.princeton.edu": "history.princeton.edu", "piirs.princeton.edu": "piirs.princeton.edu", "citp.princeton.edu": "citp.princeton.edu", "innovation.princeton.edu": "innovation.princeton.edu", "arts.princeton.edu": "arts.princeton.edu", "music.princeton.edu": "music.princeton.edu", "artmuseum.princeton.edu": "artmuseum.princeton.edu", "effroncenter.princeton.edu": "effroncenter.princeton.edu", "cst.princeton.edu": "cst.princeton.edu", "phy.princeton.edu": "phy.princeton.edu", "pni.princeton.edu": "pni.princeton.edu", "classics.princeton.edu": "classics.princeton.edu", "anthropology.princeton.edu": "anthropology.princeton.edu", "orfe.princeton.edu": "orfe.princeton.edu"};
 const KEY='princeton-link-verdicts';
 let verdicts={};
 let sortK='top',sortDir=1;
