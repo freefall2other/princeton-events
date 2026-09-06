@@ -134,13 +134,13 @@ function iconSvg(r){return `<svg class="ico" viewBox="0 0 16 16" aria-hidden="tr
 function hostOf(u){try{return new URL(u).hostname}catch(e){return ''}}
 // Site logo: DuckDuckGo icon service, then Google's, then the drawn subject icon.
 function logoHtml(r){const h=hostOf(r.url);if(!h)return iconSvg(r);
- const slug=LOGOS[r.url];
+ const slug=LOGOS[h];
  const first=slug?`data/logos/${slug}.svg`:`https://icons.duckduckgo.com/ip3/${h}.ico`;
  return `<span class="logowrap${slug?' wide':''}">`
   +`<img class="logo" alt="" loading="lazy" src="${first}" data-step="${slug?'-2':'0'}" data-slug="${slug||''}" data-host="${h}">`
   +`<span class="logofallback" hidden>${iconSvg(r)}</span></span>`;}
 
-const LOGOS={"https://www.princeton.edu/events": "central-calendar", "https://community.princeton.edu/news-events/upcoming-public-events": "community-cra", "https://lectures.princeton.edu/lectures": "public-lectures", "https://humanities.princeton.edu/events/": "humanities-council", "https://uchv.princeton.edu/events": "uchv", "https://spia.princeton.edu/events": "spia", "https://jmp.princeton.edu/events": "jmp", "https://history.princeton.edu/news-events/events": "history", "https://piirs.princeton.edu/events": "piirs", "https://citp.princeton.edu/events": "citp", "https://innovation.princeton.edu/events": "innovation", "https://arts.princeton.edu/events": "lewis-center"};
+const LOGOS={"www.princeton.edu": "www.princeton.edu", "community.princeton.edu": "community.princeton.edu", "lectures.princeton.edu": "lectures.princeton.edu", "humanities.princeton.edu": "humanities.princeton.edu", "uchv.princeton.edu": "uchv.princeton.edu", "spia.princeton.edu": "spia.princeton.edu", "icea.spia.princeton.edu": "icea.spia.princeton.edu", "jmp.princeton.edu": "jmp.princeton.edu", "history.princeton.edu": "history.princeton.edu", "piirs.princeton.edu": "piirs.princeton.edu", "citp.princeton.edu": "citp.princeton.edu", "innovation.princeton.edu": "innovation.princeton.edu", "arts.princeton.edu": "arts.princeton.edu", "music.princeton.edu": "music.princeton.edu"};
 const KEY='princeton-link-verdicts';
 let verdicts={};
 let sortK='top',sortDir=1;
