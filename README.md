@@ -10,6 +10,7 @@ Live page: https://freefall2other.github.io/princeton-events/
 - `data/sources.json` — the catalog rows the page is built from.
 - `data/Princeton_Events_Catalog_v2.xlsx` — the full catalog with platform, pagination, audience, and verification notes.
 - `.nojekyll` — tells GitHub Pages to serve files as-is.
+- `scripts/fetch-logos.sh` + `scripts/logo-sources.tsv` — downloads each source’s own logo into `data/logos/`, which the page uses.
 
 ## Setting up GitHub Pages (once)
 
