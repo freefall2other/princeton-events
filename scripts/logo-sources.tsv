@@ -1,58 +1,81 @@
 # name	url	(logo harvested from each site's own header; name = domain slug used by index.html)
-www.princeton.edu	https://www.princeton.edu/themes/custom/hobbes/icons/favicon-96x96.png
-community.princeton.edu	https://community.princeton.edu/sites/g/files/toruqf751/files/CRA%20Logo%20and%20name%20for%20Website.png
-lectures.princeton.edu	https://lectures.princeton.edu/sites/g/files/toruqf296/files/pl-logo-bw.svg
-humanities.princeton.edu	https://humanities.princeton.edu/wp-content/uploads/2016/09/Humanities-Council.png
-uchv.princeton.edu	https://uchv.princeton.edu/sites/g/files/toruqf7741/files/logo-uchv-stanrdard.svg
-spia.princeton.edu	https://spia.princeton.edu/themes/custom/wws_glider/images/Princeton-SPIA_CMYK.svg
-icea.spia.princeton.edu	https://spia.princeton.edu/themes/custom/wws_glider/images/Princeton-SPIA_CMYK.svg
-jmp.princeton.edu	https://jmp.princeton.edu/sites/g/files/toruqf5371/files/logo-jmp.svg
-history.princeton.edu	https://history.princeton.edu/sites/g/files/toruqf5351/files/logo.png
-piirs.princeton.edu	https://piirs.princeton.edu/sites/g/files/toruqf671/files/Logo%20white%20in%20dark%20bg.svg
-citp.princeton.edu	https://citp.princeton.edu/sites/g/files/toruqf6781/files/CITP_Compact_Full_Name_URL%20%281%29.png
-innovation.princeton.edu	https://innovation.princeton.edu/sites/g/files/toruqf7701/files/Office%20of%20innovation_OI%20only.svg
-arts.princeton.edu	https://arts.princeton.edu/sites/g/files/toruqf7991/files/PU_LCA%20Lockup_hori_left_CMYK.png
-music.princeton.edu	https://music.princeton.edu/sites/g/files/toruqf7606/files/DoMaP_lockup_2025_9-23_b_DeptMusic_White_Black.svg
-effroncenter.princeton.edu	https://effroncenter.princeton.edu/sites/g/files/toruqf596/files/new_orange_eff-shield-hzntl-black26full.png
+# www.princeton.edu — manually provided logo; data/logos/www.princeton.edu.png is committed directly.
+# community.princeton.edu — manually provided logo; data/logos/community.princeton.edu.png is committed directly.
+# lectures.princeton.edu — manually provided logo; data/logos/lectures.princeton.edu.png is committed directly.
+# humanities.princeton.edu — manually provided logo; data/logos/humanities.princeton.edu.webp is committed directly.
+# uchv.princeton.edu — manually provided logo; data/logos/uchv.princeton.edu.png is committed directly.
+# spia.princeton.edu — manually provided logo; data/logos/spia.princeton.edu.png is committed directly.
+# icea.spia.princeton.edu — manually provided logo; data/logos/icea.spia.princeton.edu.webp is committed directly.
+# jmp.princeton.edu — manually provided logo; data/logos/jmp.princeton.edu.webp is committed directly.
+# history.princeton.edu — manually provided logo; data/logos/history.princeton.edu.webp is committed directly.
+# piirs.princeton.edu — manually provided logo; data/logos/piirs.princeton.edu.png is committed directly.
+# citp.princeton.edu — manually provided logo; data/logos/citp.princeton.edu.png is committed directly.
+# innovation.princeton.edu — manually provided logo; data/logos/innovation.princeton.edu.webp is committed directly.
+# arts.princeton.edu — manually provided logo; data/logos/arts.princeton.edu.jpg is committed directly.
+# music.princeton.edu — manually provided logo; data/logos/music.princeton.edu.png is committed directly.
+# effroncenter.princeton.edu — manually provided logo; data/logos/effroncenter.princeton.edu.png is committed directly.
 # artmuseum.princeton.edu — logo is inline SVG on their site with no file to fetch; data/logos/artmuseum.princeton.edu.png is committed directly.
-cst.princeton.edu	https://cst.princeton.edu/sites/g/files/toruqf6481/files/CENTER%20CST.gradient.black_.png
-phy.princeton.edu	https://phy.princeton.edu/sites/g/files/toruqf6851/files/125317_PhysicsLogo_070725_ej_Final-01.png
-pni.princeton.edu	https://pni.princeton.edu/sites/g/files/toruqf321/files/pni-no-text.svg
-classics.princeton.edu	https://classics.princeton.edu/sites/g/files/toruqf7291/files/logo-classics2024.svg
-anthropology.princeton.edu	https://anthropology.princeton.edu/sites/g/files/toruqf7976/files/ap-logo-whiteorange-420x84.png
-orfe.princeton.edu	https://orfe.princeton.edu/sites/g/files/toruqf1286/files/orfe_0.png
-judaic.princeton.edu	https://judaic.princeton.edu/sites/g/files/toruqf8136/files/Judaic_logo_2022.png
-spo.princeton.edu	https://spo.princeton.edu/sites/g/files/toruqf8011/files/SPO%20Signature%203%20horz%202colors%20RGB.png
-italianstudies.princeton.edu	https://italianstudies.princeton.edu/wp-content/uploads/sites/2/2016/09/Italian-Studies.png
-artandarchaeology.princeton.edu	https://artandarchaeology.princeton.edu/sites/g/files/toruqf1651/files/logo2_1.png
-fis.princeton.edu	https://fis.princeton.edu/wp-content/uploads/2021/09/cropped-FIS-2021-logo-cropped_banner.png
-princetonlibrary.libnet.info	https://princetonlibrary.libnet.info/images/editor/princetonlibrary/logo-1.png
-princetonlibrary.org	https://princetonlibrary.libnet.info/images/editor/princetonlibrary/logo-1.png
+# cst.princeton.edu — manually provided logo; data/logos/cst.princeton.edu.jpg is committed directly.
+# phy.princeton.edu — manually provided logo; data/logos/phy.princeton.edu.png is committed directly.
+# pni.princeton.edu — manually provided logo; data/logos/pni.princeton.edu.png is committed directly.
+# classics.princeton.edu — manually provided logo; data/logos/classics.princeton.edu.svg is committed directly.
+# anthropology.princeton.edu — manually provided logo; data/logos/anthropology.princeton.edu.png is committed directly.
+# orfe.princeton.edu — manually provided logo; data/logos/orfe.princeton.edu.png is committed directly.
+# judaic.princeton.edu — manually provided logo; data/logos/judaic.princeton.edu.png is committed directly.
+# spo.princeton.edu — manually provided logo; data/logos/spo.princeton.edu.png is committed directly.
+# italianstudies.princeton.edu — manually provided logo; data/logos/italianstudies.princeton.edu.webp is committed directly.
+# artandarchaeology.princeton.edu — manually provided logo; data/logos/artandarchaeology.princeton.edu.png is committed directly.
+# fis.princeton.edu — manually provided logo; data/logos/fis.princeton.edu.jpg is committed directly.
+# princetonlibrary.libnet.info — manually provided logo; data/logos/princetonlibrary.libnet.info.jpg is committed directly.
+# princetonlibrary.org — manually provided logo; data/logos/princetonlibrary.org.jpg is committed directly.
 # princetongardentheatre.org — manually provided logo; data/logos/princetongardentheatre.org.png is committed directly.
-www.labyrinthbooks.com	https://cdn11.bigcommerce.com/s-jo8zgdp0jo/images/stencil/250x100/download_1737493670__83675.original.png
-ai.princeton.edu	https://ai.princeton.edu/sites/g/files/toruqf6846/files/Prin%20AI%20-%20Linear%20-%20Reverse.svg
+# www.labyrinthbooks.com — manually provided logo; data/logos/www.labyrinthbooks.com.webp is committed directly.
+# ai.princeton.edu — manually provided logo; data/logos/ai.princeton.edu.png is committed directly.
 # fpul.princeton.edu — manually provided logo; data/logos/fpul.princeton.edu.png is committed directly.
 # gradschool.princeton.edu — manually provided logo; data/logos/gradschool.princeton.edu.png is committed directly.
-climatefutures.princeton.edu	https://climatefutures.princeton.edu/wp-content/themes/FoundationPress/src/assets/images/logo/CFI-logo.svg
-environment.princeton.edu	https://environment.princeton.edu/wp-content/themes/FoundationPress/src/assets/images/logo/hmei-logo.svg
-gceps.princeton.edu	https://gceps.princeton.edu/wp-content/uploads/2022/01/newlogo.png
-my.princeton.edu	https://my.princeton.edu/upload/princeton/2021/image_upload_2269002_MyPrinceton_100x400_131174046.png
-palmersquare.com	https://palmersquare.com/wp-content/uploads/2024/03/palmersquare-black_registered.png
-www.princetonchapelchoir.com	https://images.squarespace-cdn.com/content/v1/55ce76d6e4b02b290433a82c/1529731754931-QQ483QRXH4LQMALMI5Y5/chapel3logo.png
-www.princetonsymphony.org	https://www.princetonsymphony.org/themes/custom/pso/logo.svg
-economics.princeton.edu	https://economics.princeton.edu/wp-content/themes/princeton/images/logo.svg
-politics.princeton.edu	https://politics.princeton.edu/themes/custom/politics/static/images/PU-horizontal.svg
-tickets.princeton.edu	https://s3.eu-central-1.amazonaws.com/yt-s3/809e422f-2245-4bb8-949d-31b8bb83e166.png
-cdh.princeton.edu	https://cdh.princeton.edu/static/images/cdhlogo_square.jpg
-press.princeton.edu	https://press.princeton.edu/themes/custom/themekit/logo-social.png
-goprincetontigers.com	https://dxbhsrqyrr690.cloudfront.net/sidearm.nextgen.sites/princeton.sidearmsports.com/images/nextgen_2022/logo_main.svg
+# climatefutures.princeton.edu — manually provided logo; data/logos/climatefutures.princeton.edu.png is committed directly.
+# environment.princeton.edu — manually provided logo; data/logos/environment.princeton.edu.png is committed directly.
+# gceps.princeton.edu — manually provided logo; data/logos/gceps.princeton.edu.png is committed directly.
+# my.princeton.edu — manually provided logo; data/logos/my.princeton.edu.png is committed directly.
+# palmersquare.com — manually provided logo; data/logos/palmersquare.com.png is committed directly.
+# www.princetonchapelchoir.com — manually provided logo; data/logos/www.princetonchapelchoir.com.png is committed directly.
+# www.princetonsymphony.org — manually provided logo; data/logos/www.princetonsymphony.org.svg is committed directly.
+# economics.princeton.edu — manually provided logo; data/logos/economics.princeton.edu.png is committed directly.
+# politics.princeton.edu — manually provided logo; data/logos/politics.princeton.edu.png is committed directly.
+# tickets.princeton.edu — manually provided logo; data/logos/tickets.princeton.edu.png is committed directly.
+# cdh.princeton.edu — manually provided logo; data/logos/cdh.princeton.edu.png is committed directly.
+# press.princeton.edu — manually provided logo; data/logos/press.princeton.edu.png is committed directly.
+# goprincetontigers.com — manually provided logo; data/logos/goprincetontigers.com.webp is committed directly.
 # ccc.princeton.edu — manually provided logo; data/logos/ccc.princeton.edu.png is committed directly.
 # www.ias.edu — manually provided logo; data/logos/www.ias.edu.png is committed directly.
 # lisd.princeton.edu — manually provided logo; data/logos/lisd.princeton.edu.png is committed directly.
 # www.pppl.gov — manually provided logo; data/logos/www.pppl.gov.png is committed directly.
-artscouncilofprinceton.org	https://artscouncilofprinceton.org/wp-content/uploads/2022/06/arts-council-logo.png
-quantum.princeton.edu	https://quantum.princeton.edu/sites/g/files/toruqf2111/files/logo-quantum.png
+# artscouncilofprinceton.org — manually provided logo; data/logos/artscouncilofprinceton.org.png is committed directly.
+# quantum.princeton.edu — manually provided logo; data/logos/quantum.princeton.edu.png is committed directly.
 njaihub.org	https://njaihub.org/sites/g/files/toruqf8421/files/NJAI-Hub_BrandAssets_Digital_Logo_Standard_OrangeShield-white_0.svg
-kellercenter.princeton.edu	https://kellercenter.princeton.edu/themes/custom/keller/static/images/keller-logo-color.svg
+# kellercenter.princeton.edu — manually provided logo; data/logos/kellercenter.princeton.edu.png is committed directly.
 gradfutures.princeton.edu	https://gradfutures.princeton.edu/sites/g/files/toruqf721/files/gradfuturelogo_prodev_gradschool_grey_white_r_1.png
-princetongleeclub.com	https://images.squarespace-cdn.com/content/v1/5072e97284aefb9a79aba8d5/dc6eb5fd-7ba8-4be8-a9f9-2cf1fc50b788/PUGC_WebLogo.png
+# princetongleeclub.com — manually provided logo; data/logos/princetongleeclub.com.png is committed directly.
+
+# alumni.princeton.edu — manually provided logo; data/logos/alumni.princeton.edu.png is committed directly.
+# frenchfilmfestival.gradlife.princeton.edu — manually provided logo; data/logos/frenchfilmfestival.gradlife.princeton.edu.png is committed directly.
+# libcal.princeton.edu — manually provided logo; data/logos/libcal.princeton.edu.png is committed directly.
+# pph.princeton.edu — manually provided logo; data/logos/pph.princeton.edu.png is committed directly.
+# renaissance.princeton.edu — manually provided logo; data/logos/renaissance.princeton.edu.png is committed directly.
+# soa.princeton.edu — manually provided logo; data/logos/soa.princeton.edu.png is committed directly.
+# www.tapinto.net — manually provided logo; data/logos/www.tapinto.net.png is committed directly.
+# www.astro.princeton.edu — manually provided logo; data/logos/www.astro.princeton.edu.jpg is committed directly.
+# behavioralpolicy.princeton.edu — manually provided logo; data/logos/behavioralpolicy.princeton.edu.png is committed directly.
+# cipgs.princeton.edu — manually provided logo; data/logos/cipgs.princeton.edu.png is committed directly.
+# cpree.princeton.edu — manually provided logo; data/logos/cpree.princeton.edu.png is committed directly.
+# www.cs.princeton.edu — manually provided logo; data/logos/www.cs.princeton.edu.png is committed directly.
+# csdp.princeton.edu — manually provided logo; data/logos/csdp.princeton.edu.jpg is committed directly.
+# earlymusic.princeton.edu — manually provided logo; data/logos/earlymusic.princeton.edu.png is committed directly.
+# eeb.princeton.edu — manually provided logo; data/logos/eeb.princeton.edu.png is committed directly.
+# fit.princeton.edu — manually provided logo; data/logos/fit.princeton.edu.png is committed directly.
+# funggfp.princeton.edu — manually provided logo; data/logos/funggfp.princeton.edu.png is committed directly.
+# molbio.princeton.edu — manually provided logo; data/logos/molbio.princeton.edu.webp is committed directly.
+# initiative.humanities.princeton.edu — manually provided logo; data/logos/initiative.humanities.princeton.edu.png is committed directly.
+# sipsas.project.princeton.edu — manually provided logo; data/logos/sipsas.project.princeton.edu.png is committed directly.
+# slavic.princeton.edu — manually provided logo; data/logos/slavic.princeton.edu.png is committed directly.
+# concerts.princeton.edu — manually provided logo; data/logos/concerts.princeton.edu.png is committed directly.
