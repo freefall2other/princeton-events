@@ -82,3 +82,4 @@
 # sinfonia.princeton.edu — manually provided logo; data/logos/sinfonia.princeton.edu.png is committed directly.
 # engineering.princeton.edu — manually provided logo; data/logos/engineering.princeton.edu.png is committed directly.
 # research.princeton.edu — manually provided logo; data/logos/research.princeton.edu.png is committed directly.
+# www.meetup.com — manually provided logo (the Quantum Driven New Jersey group avatar); data/logos/www.meetup.com.jpg is committed directly. Keyed by host, so any future meetup.com source would inherit it.
