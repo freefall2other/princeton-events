@@ -171,10 +171,15 @@ const CATS=["General Events","Politics, Policy & International Affairs","Science
 const catIdx=r=>{const i=CATS.indexOf(r.cat);return i<0?CATS.length:i;};
 /* Favorites are lifted into their own section only in the "All" view; pick a category and its
    favorites stay with it, so a category never looks emptier than it is. */
-const sectionOf=r=>($('#fScope').value==='all'&&isFav(r.id))?FAVSEC:r.cat;
+const FAVSCOPE='__fav';
+const sectionOf=r=>{const s=$('#fScope').value;return ((s==='all'||s===FAVSCOPE)&&isFav(r.id))?FAVSEC:r.cat;};
 function initScope(){const counts={};DATA.forEach(r=>counts[r.cat]=(counts[r.cat]||0)+1);
  $('#fScope').innerHTML=`<option value="all">All (${DATA.length})</option>`
+  +`<option value="${FAVSCOPE}">${FAVSEC}</option>`
   +CATS.map(c=>`<option value="${esc(c)}">${esc(c)} (${counts[c]||0})</option>`).join('');}
+/* The favorites count moves as stars are toggled, so refresh it on each draw. */
+function syncFavCount(){const o=$(`#fScope option[value="${FAVSCOPE}"]`);
+ if(o)o.textContent=`${FAVSEC} (${DATA.filter(r=>isFav(r.id)).length})`;}
 /* Display order: Favorites first (keeping their curated rank), then each category in turn. */
 function positions(){const o=[...DATA].sort((a,b)=>{
   const fa=isFav(a.id)?0:1,fb=isFav(b.id)?0:1;
@@ -200,11 +205,12 @@ function v(id){return verdicts[id]||{verdict:'',note:''};}
 function setV(id,patch){verdicts[id]={...v(id),...patch};save();tally();}
 function tally(){const n=DATA.filter(r=>v(r.id).verdict).length;$('#nDone').textContent=n;$('#bar').style.width=(100*n/DATA.length)+'%';}
 function filtered(){const scope=$('#fScope').value,aff=$('#fAff').value,vf=$('#fVerdict').value,q=$('#q').value.trim().toLowerCase();
- return DATA.filter(r=>{if(scope!=='all'&&r.cat!==scope)return false;if(aff&&r.aff!==aff)return false;
+ return DATA.filter(r=>{if(scope===FAVSCOPE){if(!isFav(r.id))return false;}else if(scope!=='all'&&r.cat!==scope)return false;
+  if(aff&&r.aff!==aff)return false;
   const vv=v(r.id).verdict;if(vf==='none'&&vv)return false;if(vf&&vf!=='none'&&vv!==vf)return false;
   if(q&&!(r.name+' '+r.subject+' '+r.url+' '+r.abbr+' '+r.notes).toLowerCase().includes(q))return false;return true;})
  .sort((a,b)=>{let x=a[sortK],y=b[sortK];if(sortK==='top'){x=POS[a.id];y=POS[b.id];}if(sortK==='verified'){x=!x;y=!y;}return (x>y?1:x<y?-1:0)*sortDir;});}
-function render(){POS=positions();const rows=filtered();const tb=$('#rows');tb.innerHTML='';$('#empty').hidden=rows.length>0;
+function render(){POS=positions();syncFavCount();const rows=filtered();const tb=$('#rows');tb.innerHTML='';$('#empty').hidden=rows.length>0;
  /* Section dividers only make sense in the default order; any other sort flattens the list. */
  const grouped=sortK==='top'&&sortDir===1;
  const counts={};if(grouped)for(const r of rows){const s=sectionOf(r);counts[s]=(counts[s]||0)+1;}
