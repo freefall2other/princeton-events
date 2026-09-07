@@ -75,6 +75,12 @@ th:nth-child(3),td:nth-child(3){min-width:132px}
 .homesame{color:var(--muted)}
 td.num{white-space:nowrap;font-weight:600;color:var(--ink)}
 .rowdetails{margin-top:6px}
+.chk{display:flex;align-items:center;gap:6px;cursor:pointer}
+.chk input{width:14px;height:14px;accent-color:var(--orange);cursor:pointer}
+.subrow{margin-top:6px}
+.subrow a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--rule)}
+.subrow a:hover{border-color:var(--orange)}
+.subrow .u{display:block;color:var(--muted);font-size:12px;overflow-wrap:anywhere}
 /* Narrow screens drop only the verdict buttons; the home-page link is short enough to keep. */
 @media (max-width:900px){th:nth-child(7),td:nth-child(7){display:none}}
 @media (prefers-reduced-motion:reduce){.tally .bar i{transition:none}}
@@ -87,6 +93,7 @@ td.num{white-space:nowrap;font-weight:600;color:var(--ink)}
   <label>Show <select id="fScope"><option value="all" selected>All</option></select></label>
   <label>Affiliation <select id="fAff"><option value="">any</option><option>University</option><option>Town</option></select></label>
   <label>Verdict <select id="fVerdict"><option value="">any</option><option value="none">not yet checked</option><option value="works">works</option><option value="broken">broken</option><option value="skip">skip</option></select></label>
+  <label class="chk"><input type="checkbox" id="fCollapse"> <span id="collapseLabel">Collapse duplicate pages</span></label>
   <input type="search" id="q" placeholder="Search name, subject, URL">
   <span class="status" id="saveStatus"></span>
 </div>
@@ -157,6 +164,12 @@ function hostOf(u){try{return new URL(u).hostname}catch(e){return ''}}
 // Site logo: DuckDuckGo icon service, then Google's, then the drawn subject icon.
 /* The Events and Last checked columns carry the headline numbers; everything else observed about a
    source — the full count wording, the date range, any filter, and the research notes — folds in here. */
+/* When duplicates are folded, the row that absorbed them lists them here so the pages stay reachable. */
+function relatedHtml(r){if(!collapsing())return '';
+ const kids=foldedInto(r.id);if(!kids.length)return '';
+ return `<details class="rowdetails"><summary>${kids.length} related page${kids.length>1?'s':''}</summary>`
+  +kids.map(k=>`<div class="subrow"><a href="${esc(k.url)}" target="_blank" rel="noopener">${esc(k.name)}</a><span class="u">${esc(trimUrl(k.url))}</span></div>`).join('')
+  +`</details>`;}
 function detailsHtml(r){const bits=[];
  if(r.seen)bits.push(`<div>${esc(r.seen)}</div>`);
  if(r.dates)bits.push(`<div>${esc(r.dates)}</div>`);
@@ -193,16 +206,23 @@ const catIdx=r=>{const i=CATS.indexOf(r.cat);return i<0?CATS.length:i;};
 /* Favorites are lifted into their own section only in the "All" view; pick a category and its
    favorites stay with it, so a category never looks emptier than it is. */
 const FAVSCOPE='__fav';
+/* Duplicate rows point at the row whose feed they repeat. Folding them tidies the list, but a
+   starred row is never folded — TOWN-013 is flagged a duplicate of TOWN-046 while being the
+   favorite that actually carries the events, and hiding it inside a stub would be a nasty surprise. */
+const collapsing=()=>$('#fCollapse').checked;
+const isFolded=r=>collapsing()&&!!r.dup&&!isFav(r.id);
+const foldedInto=id=>DATA.filter(r=>r.dup===id&&!isFav(r.id));
 const sectionOf=r=>{const s=$('#fScope').value;return ((s==='all'||s===FAVSCOPE)&&isFav(r.id))?FAVSEC:r.cat;};
 function initScope(){const counts={};DATA.forEach(r=>counts[r.cat]=(counts[r.cat]||0)+1);
  $('#fScope').innerHTML=`<option value="all">All (${DATA.length})</option>`
   +`<option value="${FAVSCOPE}">${FAVSEC}</option>`
-  +CATS.map(c=>`<option value="${esc(c)}">${esc(c)} (${counts[c]||0})</option>`).join('');}
+  +CATS.map(c=>`<option value="${esc(c)}">${esc(c)} (${counts[c]||0})</option>`).join('');
+ $('#collapseLabel').textContent=`Collapse ${DATA.filter(r=>r.dup).length} duplicate pages`;}
 /* The favorites count moves as stars are toggled, so refresh it on each draw. */
 function syncFavCount(){const o=$(`#fScope option[value="${FAVSCOPE}"]`);
  if(o)o.textContent=`${FAVSEC} (${DATA.filter(r=>isFav(r.id)).length})`;}
 /* Display order: Favorites first (keeping their curated rank), then each category in turn. */
-function positions(){const o=[...DATA].sort((a,b)=>{
+function positions(){const o=DATA.filter(r=>!isFolded(r)).sort((a,b)=>{
   const fa=isFav(a.id)?0:1,fb=isFav(b.id)?0:1;
   if(fa!==fb)return fa-fb;
   if(fa===1){const ca=catIdx(a),cb=catIdx(b);if(ca!==cb)return ca-cb;}
@@ -226,7 +246,8 @@ function v(id){return verdicts[id]||{verdict:'',note:''};}
 function setV(id,patch){verdicts[id]={...v(id),...patch};save();tally();}
 function tally(){const n=DATA.filter(r=>v(r.id).verdict).length;$('#nDone').textContent=n;$('#bar').style.width=(100*n/DATA.length)+'%';}
 function filtered(){const scope=$('#fScope').value,aff=$('#fAff').value,vf=$('#fVerdict').value,q=$('#q').value.trim().toLowerCase();
- return DATA.filter(r=>{if(scope===FAVSCOPE){if(!isFav(r.id))return false;}else if(scope!=='all'&&r.cat!==scope)return false;
+ return DATA.filter(r=>{if(isFolded(r))return false;
+  if(scope===FAVSCOPE){if(!isFav(r.id))return false;}else if(scope!=='all'&&r.cat!==scope)return false;
   if(aff&&r.aff!==aff)return false;
   const vv=v(r.id).verdict;if(vf==='none'&&vv)return false;if(vf&&vf!=='none'&&vv!==vf)return false;
   if(q&&!(r.name+' '+r.subject+' '+r.url+' '+r.abbr+' '+r.notes).toLowerCase().includes(q))return false;return true;})
@@ -245,7 +266,7 @@ function render(){POS=positions();syncFavCount();const rows=filtered();const tb=
   tr.innerHTML=`<td class="rank${on?'':' plain'}">${POS[r.id]}<button type="button" class="star${on?'':' off'}" data-id="${r.id}" aria-pressed="${on}" title="${on?'Favorite — click to remove':'Click to make this a favorite'}">${on?'★':'☆'}</button></td>
   <td class="link"><span class="linkhead">${logoHtml(r)}<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)}</a></span><span class="url">${esc(r.url)}</span>
    <div class="meta" style="margin-top:4px"><span class="pill ${r.aff==='University'?'uni':''}">${esc(r.aff)}</span>${r.abbr?`<span class="pill">${esc(r.abbr)}</span>`:''}${r.dup?`<span class="pill">duplicate of ${esc(r.dup)}</span>`:r.parent?`<span class="pill">child of ${esc(r.parent)}</span>`:''}</div>
-   ${detailsHtml(r)}</td>
+   ${relatedHtml(r)}${detailsHtml(r)}</td>
   <td class="meta">${homeHtml(r)}</td>
   <td class="meta">${esc(r.subject)}</td>
   <td class="meta num">${r.events?esc(r.events):'<span class="homesame">—</span>'}</td>
@@ -271,7 +292,7 @@ document.addEventListener('error',e=>{const img=e.target;if(!img.classList||!img
  else{img.hidden=true;const fb=img.parentElement.querySelector('.logofallback');if(fb)fb.hidden=false;}
 },true);
 document.addEventListener('input',e=>{if(e.target.tagName==='TEXTAREA')setV(e.target.dataset.id,{note:e.target.value});});
-['#fScope','#fAff','#fVerdict'].forEach(s=>$(s).addEventListener('change',render));$('#q').addEventListener('input',render);
+['#fScope','#fAff','#fVerdict','#fCollapse'].forEach(s=>$(s).addEventListener('change',render));$('#q').addEventListener('input',render);
 document.querySelectorAll('th[data-k]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.k;if(sortK===k)sortDir*=-1;else{sortK=k;sortDir=1;}render();}));
 const lb=$('#lightbox');
 /* The row shows a small icon; the lightbox prefers the organisation's full logo where one exists,
