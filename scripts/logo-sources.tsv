@@ -15,7 +15,7 @@
 # music.princeton.edu — manually provided logo; data/logos/music.princeton.edu.png is committed directly.
 # effroncenter.princeton.edu — manually provided logo; data/logos/effroncenter.princeton.edu.png is committed directly.
 # artmuseum.princeton.edu — logo is inline SVG on their site with no file to fetch; data/logos/artmuseum.princeton.edu.png is committed directly.
-# cst.princeton.edu — manually provided logo; data/logos/cst.princeton.edu.jpg is committed directly.
+# cst.princeton.edu — manually provided logo; data/logos/cst.princeton.edu.png is committed directly.
 # phy.princeton.edu — manually provided logo; data/logos/phy.princeton.edu.png is committed directly.
 # pni.princeton.edu — manually provided logo; data/logos/pni.princeton.edu.png is committed directly.
 # classics.princeton.edu — manually provided logo; data/logos/classics.princeton.edu.svg is committed directly.
@@ -25,8 +25,8 @@
 # spo.princeton.edu — manually provided logo; data/logos/spo.princeton.edu.png is committed directly.
 # italianstudies.princeton.edu — manually provided logo; data/logos/italianstudies.princeton.edu.webp is committed directly.
 # artandarchaeology.princeton.edu — manually provided logo; data/logos/artandarchaeology.princeton.edu.png is committed directly.
-# fis.princeton.edu — manually provided logo; data/logos/fis.princeton.edu.jpg is committed directly.
-# princetonlibrary.libnet.info — manually provided logo; data/logos/princetonlibrary.libnet.info.jpg is committed directly.
+# fis.princeton.edu — manually provided logo; data/logos/fis.princeton.edu.png is committed directly.
+# princetonlibrary.libnet.info — manually provided logo; data/logos/princetonlibrary.libnet.info.png is committed directly.
 # princetonlibrary.org — manually provided logo; data/logos/princetonlibrary.org.webp is committed directly.
 # princetongardentheatre.org — manually provided logo; data/logos/princetongardentheatre.org.png is committed directly.
 # www.labyrinthbooks.com — manually provided logo; data/logos/www.labyrinthbooks.com.webp is committed directly.
@@ -80,3 +80,4 @@
 # slavic.princeton.edu — manually provided logo; data/logos/slavic.princeton.edu.png is committed directly.
 # concerts.princeton.edu — manually provided logo; data/logos/concerts.princeton.edu.png is committed directly.
 # sinfonia.princeton.edu — manually provided logo; data/logos/sinfonia.princeton.edu.png is committed directly.
+# engineering.princeton.edu — manually provided logo; data/logos/engineering.princeton.edu.png is committed directly.
