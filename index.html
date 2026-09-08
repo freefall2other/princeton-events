@@ -75,6 +75,7 @@ th:nth-child(3),td:nth-child(3){min-width:132px}
 .homesame{color:var(--muted)}
 td.num{white-space:nowrap;font-weight:600;color:var(--ink)}
 .rowdetails{margin-top:6px}
+.rowdetails .lbl{font-weight:600;color:var(--ink)}
 .chk{display:flex;align-items:center;gap:6px;cursor:pointer}
 .chk input{width:14px;height:14px;accent-color:var(--orange);cursor:pointer}
 .subrow{margin-top:6px}
@@ -171,6 +172,9 @@ function relatedHtml(r){if(!collapsing())return '';
   +kids.map(k=>`<div class="subrow"><a href="${esc(k.url)}" target="_blank" rel="noopener">${esc(k.name)}</a><span class="u">${esc(trimUrl(k.url))}</span></div>`).join('')
   +`</details>`;}
 function detailsHtml(r){const bits=[];
+ /* Audience lost its column but not its value: whether you can actually turn up is the
+    first thing worth knowing, so it leads the details rather than sitting unrendered. */
+ if(r.aud)bits.push(`<div><span class="lbl">Audience:</span> ${esc(r.aud)}</div>`);
  if(r.seen)bits.push(`<div>${esc(r.seen)}</div>`);
  if(r.dates)bits.push(`<div>${esc(r.dates)}</div>`);
  if(r.filt&&!r.filt.startsWith('None'))bits.push(`<div>Filter: ${esc(r.filt)}</div>`);
@@ -250,7 +254,7 @@ function filtered(){const scope=$('#fScope').value,aff=$('#fAff').value,vf=$('#f
   if(scope===FAVSCOPE){if(!isFav(r.id))return false;}else if(scope!=='all'&&r.cat!==scope)return false;
   if(aff&&r.aff!==aff)return false;
   const vv=v(r.id).verdict;if(vf==='none'&&vv)return false;if(vf&&vf!=='none'&&vv!==vf)return false;
-  if(q&&!(r.name+' '+r.subject+' '+r.url+' '+r.abbr+' '+r.notes).toLowerCase().includes(q))return false;return true;})
+  if(q&&!(r.name+' '+r.subject+' '+r.url+' '+r.abbr+' '+r.notes+' '+r.aud).toLowerCase().includes(q))return false;return true;})
  .sort((a,b)=>{let x=a[sortK],y=b[sortK];if(sortK==='top'){x=POS[a.id];y=POS[b.id];}if(sortK==='verified'){x=!x;y=!y;}return (x>y?1:x<y?-1:0)*sortDir;});}
 function render(){POS=positions();syncFavCount();const rows=filtered();const tb=$('#rows');tb.innerHTML='';$('#empty').hidden=rows.length>0;
  /* Section dividers only make sense in the default order; any other sort flattens the list. */
