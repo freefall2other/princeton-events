@@ -106,6 +106,7 @@ td.num{white-space:nowrap;font-weight:600;color:var(--ink)}
 .room h3{margin:0;font-size:17px;font-weight:600}
 .room .bldg{color:var(--muted);font-size:14px;margin-top:2px}
 .room-photos{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule)}
+.room-photos.one{grid-template-columns:1fr}
 .room-photo{position:relative;display:block;padding:0;border:0;border-radius:0;background:var(--row);cursor:zoom-in}
 .room-photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
 .room-photo span{position:absolute;left:6px;bottom:6px;background:rgba(28,27,25,.72);color:#fff;font-size:11.5px;padding:2px 6px;border-radius:3px}
@@ -494,26 +495,39 @@ load();
    exterior photos, and the AccessAble guide where one exists. Drawn the first time the tab opens,
    so the photos are not downloaded by anyone who only uses Events. */
 const ROOMS=[{"group":"Princeton University","name":"A71","building":"Louis A. Simpson International Building","interior":"data/rooms/simpson-a71-interior.jpg","exterior":"data/rooms/simpson-exterior.jpg","access":"https://www.accessableusa.com/princeton-university/access-guides/louis-a-simpson-international-building-a71"},{"group":"Princeton University","name":"Bowl 016","building":"Robertson Hall","interior":"data/rooms/robertson-016-interior.jpg","exterior":"data/rooms/robertson-exterior.jpg","access":"https://www.accessableusa.com/princeton-university/access-guides/robertson-hall-016"},{"group":"Princeton University","name":"McCosh 50 - Helm Auditorium","building":"McCosh Hall","interior":"data/rooms/mccosh-50-interior.jpg","exterior":"data/rooms/mccosh-exterior.jpg","access":"https://www.accessableusa.com/princeton-university/access-guides/mccosh-50-helm-auditorium"},{"group":"Princeton University","name":"McCosh 10 - Arthur M. Wood Auditorium","building":"McCosh Hall","interior":"data/rooms/mccosh-10-interior.jpg","exterior":"data/rooms/mccosh-exterior.jpg","access":"https://www.accessableusa.com/princeton-university/access-guides/mccosh-10-arthur-m-wood-auditorium"},{"group":"Princeton University","name":"Chancellor Green Rotunda","building":"near East Pyne Hall","interior":"data/rooms/chancellor-green-interior.webp","exterior":"data/rooms/chancellor-green-exterior.jpg","access":"https://www.accessableusa.com/princeton-university/access-guides/chancellor-green"},{"group":"Princeton University","name":"Taplin Auditorium, Room 225","building":"Fine Hall","interior":"data/rooms/fine-225-taplin-interior.jpg","exterior":"data/rooms/fine-hall-exterior.jpg","access":"https://www.accessableusa.com/princeton-university/access-guides/fine-hall-room-225-taplin-auditorium"},{"group":"Downtown Princeton","name":"Princeton Garden Theatre","building":"Downtown Princeton","interior":"","exterior":"data/rooms/garden-theatre-exterior.jpg","access":"https://www.accessableusa.com/princeton-university/access-guides/princeton-garden-theatre"}];
-/* Within a section the cards read as a walk through buildings: order by building, then by room
-   name inside it, so a new room lands beside the others in its building however it was added. */
-const byBuilding=(a,b)=>a.building.localeCompare(b.building,'en',{numeric:true,sensitivity:'base'})
- ||a.name.localeCompare(b.name,'en',{numeric:true,sensitivity:'base'});
+/* Cards go in name order — the room's own name in Rooms, the building's in Buildings — so a new
+   entry lands in its alphabetical place however it was added. */
+const byName=(a,b)=>a.name.localeCompare(b.name,'en',{numeric:true,sensitivity:'base'});
 function roomsHtml(){
  const groups=[...new Set(ROOMS.map(r=>r.group))];
- return groups.map(g=>{const rs=ROOMS.filter(r=>r.group===g).sort(byBuilding);
+ return groups.map(g=>{const rs=ROOMS.filter(r=>r.group===g).sort(byName);
   const card=r=>{
    const photo=(src,kind)=>src
     ?`<button type="button" class="room-photo" data-src="${esc(src)}" data-caption="${esc(r.name+' — '+r.building+' ('+kind.toLowerCase()+')')}"><img src="${esc(src)}" alt="${esc(r.name+', '+r.building+', '+kind.toLowerCase())}" loading="lazy"><span>${kind}</span></button>`
     :`<div class="room-photo none">No ${kind.toLowerCase()} photo</div>`;
    return `<article class="room"><div class="room-head"><h3>${esc(r.name)}</h3><div class="bldg">${esc(r.building)}</div></div><div class="room-photos">${photo(r.interior,'Interior')}${photo(r.exterior,'Exterior')}</div><div class="room-foot">${r.access?`<a href="${esc(r.access)}" target="_blank" rel="noopener">AccessAble access guide</a>`:'<span class="none">No AccessAble guide</span>'}</div></article>`;};
   return `<h2 class="room-section">${esc(g)}<span class="sec-count">${rs.length}</span></h2><div class="room-grid">${rs.map(card).join('')}</div>`;}).join('');}
+/* Buildings follow the rooms: the ones the rooms sit in, plus a few that carry events on their own.
+   A building's AccessAble guide is a level up from a room's — entrances, elevators, toilets and
+   parking for the whole building — so it is worth having even where a room guide already exists. */
+const BUILDINGS=[{"group":"Princeton University","name":"Chancellor Green","photo":"data/rooms/chancellor-green-exterior.jpg","note":"Octagonal building north of East Pyne, above the Chancellor Green Café; holds the Rotunda.","access":"https://www.accessableusa.com/princeton-university/access-guides/chancellor-green"},{"group":"Princeton University","name":"East Pyne Hall","photo":"","note":"The step-free way into Chancellor Green runs through here, off floor 1R.","access":"https://www.accessableusa.com/princeton-university/access-guides/east-pyne-hall"},{"group":"Princeton University","name":"Fine Hall","photo":"data/rooms/fine-hall-exterior.jpg","note":"The mathematics tower on Washington Road; Taplin Auditorium is on level 2.","access":"https://www.accessableusa.com/princeton-university/access-guides/fine-hall"},{"group":"Princeton University","name":"Firestone Library","photo":"data/buildings/firestone-library-exterior.jpg","note":"The main university library, beside the University Chapel.","access":"https://www.accessableusa.com/princeton-university/access-guides/firestone-library"},{"group":"Princeton University","name":"Lewis Center for the Arts","photo":"data/buildings/lewis-center-exterior.jpg","note":"The arts complex by the Dinky station — theatres, studios and the Arts Tower.","access":"https://www.accessableusa.com/princeton-university/access-guides/lewis-center-for-the-arts"},{"group":"Princeton University","name":"Louis A. Simpson International Building","photo":"data/rooms/simpson-exterior.jpg","note":"Holds room A71.","access":"https://www.accessableusa.com/princeton-university/access-guides/louis-a-simpson-international-building"},{"group":"Princeton University","name":"McCosh Hall","photo":"data/rooms/mccosh-exterior.jpg","note":"Holds McCosh 10 and McCosh 50.","access":"https://www.accessableusa.com/princeton-university/access-guides/mccosh-hall"},{"group":"Princeton University","name":"Prospect House","photo":"data/buildings/prospect-house-exterior.jpg","note":"The faculty club in the middle of campus, behind Nassau Hall.","access":"https://www.accessableusa.com/princeton-university/access-guides/prospect-house"},{"group":"Princeton University","name":"Robertson Hall","photo":"data/rooms/robertson-exterior.jpg","note":"SPIA's building on Scudder Plaza; holds Bowl 016.","access":"https://www.accessableusa.com/princeton-university/access-guides/robertson-hall"}];
+function buildingsHtml(){
+ const groups=[...new Set(BUILDINGS.map(b=>b.group))];
+ return groups.map(g=>{const bs=BUILDINGS.filter(b=>b.group===g).sort(byName);
+  const card=b=>`<article class="room"><div class="room-head"><h3>${esc(b.name)}</h3>${b.note?`<div class="bldg">${esc(b.note)}</div>`:''}</div>`
+   +`<div class="room-photos one">`+(b.photo
+    ?`<button type="button" class="room-photo" data-src="${esc(b.photo)}" data-caption="${esc(b.name+' (exterior)')}"><img src="${esc(b.photo)}" alt="${esc(b.name+', exterior')}" loading="lazy"><span>Exterior</span></button>`
+    :`<div class="room-photo none">No exterior photo</div>`)+`</div>`
+   +`<div class="room-foot">${b.access?`<a href="${esc(b.access)}" target="_blank" rel="noopener">AccessAble access guide</a>`:'<span class="none">No AccessAble guide</span>'}</div></article>`;
+  return `<h2 class="room-section">Buildings${groups.length>1?' — '+esc(g):''}<span class="sec-count">${bs.length}</span></h2>`
+   +`<div class="room-grid">${bs.map(card).join('')}</div>`;}).join('');}
 let roomsDrawn=false;
 function showView(v){const rooms=v==='rooms';
  $('#viewEvents').hidden=rooms;$('#viewRooms').hidden=!rooms;
  $('#eventsFooter').hidden=rooms;$('.tally').hidden=rooms;
  $('#tabEvents').setAttribute('aria-selected',String(!rooms));$('#tabRooms').setAttribute('aria-selected',String(rooms));
  $('#tabEvents').tabIndex=rooms?-1:0;$('#tabRooms').tabIndex=rooms?0:-1;
- if(rooms&&!roomsDrawn){$('#viewRooms').innerHTML=roomsHtml();roomsDrawn=true;}}
+ if(rooms&&!roomsDrawn){$('#viewRooms').innerHTML=roomsHtml()+buildingsHtml();roomsDrawn=true;}}
 /* #rooms in the address opens the Rooms tab directly, so the view can be linked to. */
 const viewFromHash=()=>location.hash==='#rooms'?'rooms':'events';
 $('#tabEvents').addEventListener('click',()=>{history.replaceState(null,'',location.pathname+location.search);showView('events');});
