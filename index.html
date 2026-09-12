@@ -92,7 +92,8 @@ td.num{white-space:nowrap;font-weight:600;color:var(--ink)}
 @media (max-width:900px){th:nth-child(7),td:nth-child(7){display:none}}
 @media (prefers-reduced-motion:reduce){.tally .bar i{transition:none}}
 
-/* Tabs: Events is the source catalog; Rooms is a reference list of venues. */
+/* Tabs: Events is the source catalog; Locations is a reference list of venues — rooms first, then
+   the buildings they sit in. */
 .tabs{display:flex;gap:4px;padding:0 32px;border-bottom:1px solid var(--rule);background:var(--paper)}
 .tab{border:0;border-bottom:3px solid transparent;border-radius:0;background:transparent;padding:12px 16px 9px;font-weight:600;color:var(--muted);margin-bottom:-1px}
 .tab:hover{color:var(--ink)}
@@ -147,7 +148,7 @@ td.num{white-space:nowrap;font-weight:600;color:var(--ink)}
 </header>
 <nav class="tabs" role="tablist" aria-label="Views">
   <button type="button" class="tab" role="tab" id="tabEvents" aria-controls="viewEvents" aria-selected="true">Events</button>
-  <button type="button" class="tab" role="tab" id="tabRooms" aria-controls="viewRooms" aria-selected="false" tabindex="-1">Rooms</button>
+  <button type="button" class="tab" role="tab" id="tabRooms" aria-controls="viewRooms" aria-selected="false" tabindex="-1">Locations</button>
 </nav>
 <section id="viewEvents" role="tabpanel" aria-labelledby="tabEvents">
 <div class="tools">
@@ -528,10 +529,11 @@ function showView(v){const rooms=v==='rooms';
  $('#tabEvents').setAttribute('aria-selected',String(!rooms));$('#tabRooms').setAttribute('aria-selected',String(rooms));
  $('#tabEvents').tabIndex=rooms?-1:0;$('#tabRooms').tabIndex=rooms?0:-1;
  if(rooms&&!roomsDrawn){$('#viewRooms').innerHTML=roomsHtml()+buildingsHtml();roomsDrawn=true;}}
-/* #rooms in the address opens the Rooms tab directly, so the view can be linked to. */
-const viewFromHash=()=>location.hash==='#rooms'?'rooms':'events';
+/* #locations in the address opens that tab directly, so the view can be linked to. #rooms, the
+   hash it used to be, still works — links and bookmarks made before the rename keep opening it. */
+const viewFromHash=()=>/^#(locations|rooms)$/.test(location.hash)?'rooms':'events';
 $('#tabEvents').addEventListener('click',()=>{history.replaceState(null,'',location.pathname+location.search);showView('events');});
-$('#tabRooms').addEventListener('click',()=>{history.replaceState(null,'','#rooms');showView('rooms');});
+$('#tabRooms').addEventListener('click',()=>{history.replaceState(null,'','#locations');showView('rooms');});
 $('.tabs').addEventListener('keydown',e=>{if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;
  const next=$('#tabRooms').getAttribute('aria-selected')==='true'?$('#tabEvents'):$('#tabRooms');next.click();next.focus();});
 window.addEventListener('hashchange',()=>showView(viewFromHash()));
