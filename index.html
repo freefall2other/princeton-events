@@ -619,12 +619,14 @@ function locStarHtml(key){const on=locFavs.has(key);
 (async()=>{try{const raw=await stGet(LOCFAVKEY),keys=raw?JSON.parse(raw):[];if(Array.isArray(keys))locFavs=new Set(keys);}catch(e){}
  if(!$('#viewRooms').hidden)drawLocations();})();
 /* Princeton Community cards are kept to the essentials: the name, the address and what kind of place it
-   is, and the photos that exist. No seats, notes or links. */
+   is, the photos that exist, and the AccessAble guide and venue page where there are ones. No seats,
+   notes or other links. */
 function communityCard(r){
  const photos=[['Interior',r.interior],['Exterior',r.exterior]].filter(([,src])=>src);
  return `<article class="room"><div class="room-head">${locStarHtml(roomKey(r))}<h3>${esc(r.name)}</h3><div class="bldg">${esc(r.building)}${r.rtype?` · ${esc(r.rtype)}`:''}</div></div>`
   +(photos.length?`<div class="room-photos${photos.length===1?' one':''}">`+photos.map(([kind,src])=>
     `<button type="button" class="room-photo" data-src="${esc(src)}" data-caption="${esc(r.name+' — '+r.building+' ('+kind.toLowerCase()+')')}"><img src="${esc(src)}" alt="${esc(r.name+', '+r.building+', '+kind.toLowerCase())}" loading="lazy"><span>${kind}</span></button>`).join('')+`</div>`:'')
+  +(links=>links.length?`<div class="room-foot">${links.join(' · ')}</div>`:'')([r.access&&`<a href="${esc(r.access)}" target="_blank" rel="noopener">AccessAble access guide</a>`,r.venue&&`<a class="ci" href="${esc(r.venue)}" target="_blank" rel="noopener">Venue page</a>`].filter(Boolean))
   +`</article>`;}
 function roomCard(r){if(r.group==='Princeton Community')return communityCard(r);
    const photo=(src,kind)=>src
