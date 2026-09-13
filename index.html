@@ -1,17 +1,12 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Princeton event sources — link check</title>
+<title>Princeton Events</title>
 <style>
 :root{--ink:#1c1b19;--muted:#6b6862;--rule:#dedbd4;--paper:#fbfaf7;--row:#f3f1ec;--orange:#e77500;--orange-soft:#fff1e2;--ok:#2f7d4a;--bad:#b3261e;--skip:#8a8680}
 *{box-sizing:border-box}
 body{margin:0;font:15px/1.45 "Source Sans 3","Segoe UI",Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper)}
 header{padding:28px 32px 18px;border-bottom:3px solid var(--orange);display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between}
 h1{margin:0;font-size:26px;font-weight:600;letter-spacing:-.01em}
-h1 small{display:block;font-size:14px;font-weight:400;color:var(--muted);margin-top:4px}
-.tally{font-size:15px;color:var(--muted)}
-.tally b{font-size:34px;font-weight:600;color:var(--ink);margin-right:4px;vertical-align:-3px}
-.tally .bar{height:6px;background:var(--rule);width:260px;margin-top:8px;border-radius:3px;overflow:hidden}
-.tally .bar i{display:block;height:100%;background:var(--orange);width:0;transition:width .3s}
 .tools{padding:14px 32px;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;border-bottom:1px solid var(--rule);background:#fff;position:sticky;top:0;z-index:5}
 .tools label{color:var(--muted);font-size:14px}
 select,input[type=search]{font:inherit;padding:6px 8px;border:1px solid var(--rule);border-radius:4px;background:#fff;color:var(--ink)}
@@ -99,7 +94,6 @@ td.num{white-space:nowrap;font-weight:600;color:var(--ink)}
 .star.implied{color:#f2b418;opacity:1}
 /* Narrow screens drop only the verdict buttons; the home-page link is short enough to keep. */
 @media (max-width:900px){th:nth-child(7),td:nth-child(7){display:none}}
-@media (prefers-reduced-motion:reduce){.tally .bar i{transition:none}}
 
 /* Tabs: Events is the source catalog; Locations is a reference list of venues — rooms first, then
    the buildings they sit in. */
@@ -206,8 +200,7 @@ td.num{white-space:nowrap;font-weight:600;color:var(--ink)}
 @media (max-width:640px){.tabs,.rooms,.src-cards{padding-left:16px;padding-right:16px}}
 </style></head><body>
 <header>
-  <h1>Princeton event sources<small><span id="nLinks">185</span> links from your catalog. Open each one, then record whether it works for you.</small></h1>
-  <div class="tally"><b id="nDone">0</b>of <span id="nTotal">185</span> checked<div class="bar"><i id="bar"></i></div></div>
+  <h1>Princeton Events</h1>
 </header>
 <nav class="tabs" role="tablist" aria-label="Views">
   <button type="button" class="tab" role="tab" id="tabEvents" aria-controls="viewEvents" aria-selected="true">Events</button>
@@ -423,8 +416,6 @@ let ft;function saveFavs(){clearTimeout(ft);ft=setTimeout(async()=>{const val=JS
  setTimeout(()=>$('#saveStatus').textContent='',3000);},300);}
 let t;function save(){clearTimeout(t);t=setTimeout(async()=>{try{if(window.storage){await window.storage.set(KEY,JSON.stringify(verdicts),false);$('#saveStatus').textContent='Saved';}else if(window.localStorage){localStorage.setItem(KEY,JSON.stringify(verdicts));$('#saveStatus').textContent='Saved on this device';}else{$('#saveStatus').textContent='Not saved — this browser is blocking storage';}}catch(e){$('#saveStatus').textContent='Save failed — this browser is blocking storage';}setTimeout(()=>$('#saveStatus').textContent='',2500);},400);}
 function v(id){return verdicts[id]||{verdict:'',note:''};}
-function setV(id,patch){verdicts[id]={...v(id),...patch};save();tally();}
-function tally(){const n=DATA.filter(r=>v(r.id).verdict).length;$('#nDone').textContent=n;$('#bar').style.width=(100*n/DATA.length)+'%';}
 /* Both searches match titles and nothing else. A word in a note or a subject used to pull in rows
    whose name said nothing of the kind, which made the count untrustworthy; now "ticketing" finds
    University Ticketing and stops there. A title includes the abbreviation shown with it, so "CITP"
@@ -520,7 +511,7 @@ function render(){POS=positions();syncFavCount();const rows=filtered();$('#empty
  $('#qCount').textContent=(q||lc(secQ.q))?`${rows.length} source${rows.length===1?'':'s'} match`:'';
  /* Cards and Logo share a container, drawn by whichever is picked. */
  $('#cardView').innerHTML=evView==='logos'?cardsHtml(rows,logoTileHtml,'logo-grid'):cardsHtml(rows);
- tally();focusSec('events');}
+ focusSec('events');}
 /* Toggle in place rather than re-sorting, so a row never jumps away mid-click; the new order applies on the next render. */
 document.addEventListener('click',e=>{const s=e.target.closest('.star:not(.locstar)');if(!s)return;
  const id=s.dataset.id,on=!favs.has(id);
@@ -564,8 +555,6 @@ $('#qLoc').addEventListener('input',drawLocations);
 document.addEventListener('input',e=>{const b=e.target.closest('.secq');if(!b)return;
  const st={sec:b.dataset.sec,q:b.value};
  if(b.dataset.view==='loc'){locSecQ=st;drawLocations();}else{secQ=st;render();}});
-/* Both totals come from the data, so adding a source cannot leave a stale number in the header. */
-$('#nLinks').textContent=DATA.length;$('#nTotal').textContent=DATA.length;
 /* Escape empties whichever box has the cursor, the way a browser's own search field behaves. */
 document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;const el=e.target;
  if(el===$('#q')&&el.value){el.value='';render();}
@@ -707,7 +696,7 @@ function locationsHtml(){
 function drawLocations(){$('#viewRooms').innerHTML=locationsHtml();focusSec('loc');}
 function showView(v){const rooms=v==='rooms';
  $('#viewEvents').hidden=rooms;$('#viewRooms').hidden=!rooms;
- $('#eventsFooter').hidden=rooms;$('.tally').hidden=rooms;
+ $('#eventsFooter').hidden=rooms;
  $('#tabEvents').setAttribute('aria-selected',String(!rooms));$('#tabRooms').setAttribute('aria-selected',String(rooms));
  $('#tabEvents').tabIndex=rooms?-1:0;$('#tabRooms').tabIndex=rooms?0:-1;
  $('#locTools').hidden=!rooms;
