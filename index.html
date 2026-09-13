@@ -315,7 +315,7 @@ const trimUrl=u=>String(u||'').replace(/^https?:\/\//,'').replace(/\/$/,'');
    handful with only a mark fall back to it rather than showing a gap. */
 /* Logo files are often replaced under the same name, and GitHub Pages lets browsers keep a copy, so
    a refreshed logo could go unseen. Every logo URL carries this version; change it whenever logos do. */
-const LOGO_V='2026-09-12b';
+const LOGO_V='2026-09-12c';
 function logoHtml(r,full,plain){const h=hostOf(r.url);if(!h)return iconSvg(r);
  const L=LOGOS[h],F=full?FULL[h]:null;
  const src=F?`data/logos-full/${F}?v=${LOGO_V}`:L?`data/logos/${L.f}?v=${LOGO_V}`:`https://icons.duckduckgo.com/ip3/${h}.ico`;
