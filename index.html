@@ -174,8 +174,19 @@ td.num{white-space:nowrap;font-weight:600;color:var(--ink)}
 .room-link:hover{color:#8a4a00}
 #roomPop{position:fixed;inset:0;background:rgba(28,27,25,.6);display:flex;align-items:center;justify-content:center;z-index:45;padding:24px}
 #roomPop[hidden]{display:none}
-#roomPop .pop-box{width:min(460px,100%);max-height:calc(100vh - 48px);overflow:auto}
+/* The pop-up is for looking at the room, so it is drawn large: photos at up to about 500px each, and
+   the card's text scaled up to match. On a phone the two photos stack. */
+#roomPop .pop-box{width:min(1000px,100%);max-height:calc(100vh - 48px);overflow:auto}
 #roomPop .room{box-shadow:0 18px 50px rgba(0,0,0,.35)}
+#roomPop .room-head{padding:18px 64px 14px 22px}
+#roomPop .room h3{font-size:26px}
+#roomPop .room .bldg{font-size:17px;margin-top:4px}
+#roomPop .room .rnote{font-size:15.5px;margin-top:8px}
+#roomPop .room-head>.locstar{top:16px;right:20px;font-size:28px}
+#roomPop .room-photo span{font-size:14px;left:10px;bottom:10px;padding:3px 8px}
+#roomPop .room-photo.none{font-size:16px}
+#roomPop .room-foot{font-size:17px;padding:14px 22px 18px}
+@media (max-width:640px){#roomPop{padding:12px}#roomPop .room-photos{grid-template-columns:1fr}#roomPop .room h3{font-size:22px}}
 #roomPopClose{display:block;margin:0 0 8px auto;background:transparent;border:1px solid rgba(255,255,255,.6);color:#fff}
 #roomPopClose:hover{background:rgba(255,255,255,.14)}
 /* Logo: nothing but each source's logo, in the same sections as Cards. The whole tile is the link to
